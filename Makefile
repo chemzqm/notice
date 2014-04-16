@@ -11,6 +11,9 @@ clean:
 watch:
 	rewatch index.js *.css -c "make build"
 
+publish:
+	@component publish
+
 doc:
 	@component build
 	@rm -fr .gh-pages
