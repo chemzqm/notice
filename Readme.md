@@ -32,6 +32,10 @@ Show notice with `msg` (String or HTML) and optional option.
 
 Hide the message in `ms` millisecond, success notice is auto hide.
 
+### .remove()
+
+Remove the message without animation.
+
 ## License
 
   MIT
