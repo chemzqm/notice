@@ -33,7 +33,7 @@ function Notice(msg, options) {
   container.appendChild(this.el);
   this.events = events(el, this);
   this.events.bind('click .notice-close', 'hide');
-  if (options.type == 'success') this.clear(2000);
+  if (options.type == 'success') this.hide(2000);
 }
 
 Notice.prototype.hide = function(ms) {
