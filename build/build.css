@@ -14,8 +14,6 @@
   padding: 10px 20px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -o-box-sizing: border-box;
   box-sizing: border-box;
   border-bottom: 1px solid #efefef;
   text-align: center;
@@ -26,15 +24,22 @@
   transform-origin: top;
 }
 /* colors from bootstrap */
-.notice-container .warning,
-.notice-container .warn {
+.notice-container .notice-warning {
   background: #fcf8e3;
   background: rgba(252, 248, 227, 0.9);
   border-color: #fbeed5;
   color: #c09853;
 }
-.notice-container .danger,
-.notice-container .error {
+
+.notice-container .notice-success {
+  background: #EAFBE3;
+  background: rgba(221, 242, 210, 0.9);
+  border-color: #D6E9C6;
+  color: #3FB16F;
+}
+
+.notice-container .notice-danger,
+.notice-container .notice-error {
   background: #f2dede;
   background: rgba(242, 222, 222, 0.9);
   border-color: #ebccd1;

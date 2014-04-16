@@ -53,8 +53,9 @@
     <div class="buttons">
       <button id="show">Show Message</button>
       <button id="hide">Show &amp; Hide</button>
-      <button id="type">Typed Message</button>
-      <button id="link">Link Message</button>
+      <button id="warning">Warning Message</button>
+      <button id="success">Success Message</button>
+      <button id="error">Error Message</button>
     </div>
     <p><a href="https://github.com/yuehu/notice">Fork me on GitHub</a></p>
     <p>A component by <a href="http://lepture.com/">Hsiaoming Yang</a></p>
@@ -63,19 +64,19 @@
     function $(id) { return document.getElementById(id) };
     var notice = require('notice');
     $('show').onclick = function() {
-      new notice.Notice({message: 'Show a simple message'}).show();
+      notice('Show a simple message');
     };
     $('hide').onclick = function() {
-      notice('This message will auto hide');
+      notice('Show auto hide message').hide(4000);
     };
-    $('type').onclick = function() {
-      notice({message: 'This message will auto hide', type: 'warn'});
+    $('warning').onclick = function() {
+      notice('warning notice', {type: 'warning'});
     };
-    $('link').onclick = function() {
-      new notice.Notice({
-        message: 'Click on this message',
-        url: 'http://lepture.com/'
-      }).show();
+    $('success').onclick = function() {
+      notice('success notice', {type: 'success'});
+    };
+    $('error').onclick = function() {
+      notice('error notice', {type: 'error'});
     };
   </script>
 </body>
