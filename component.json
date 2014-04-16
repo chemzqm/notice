@@ -2,7 +2,7 @@
   "name": "notice",
   "repository": "chemzqm/notice",
   "description": "A notification message component.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [],
   "demo": "http://chemzqm.github.io/notice/",
   "dependencies": {
