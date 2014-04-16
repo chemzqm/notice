@@ -611,97 +611,6 @@ ClassList.prototype.contains = function(name){
 
 });
 
-require.register("component~domify@1.2.2", function (exports, module) {
-
-/**
- * Expose `parse`.
- */
-
-module.exports = parse;
-
-/**
- * Wrap map from jquery.
- */
-
-var map = {
-  legend: [1, '<fieldset>', '</fieldset>'],
-  tr: [2, '<table><tbody>', '</tbody></table>'],
-  col: [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],
-  _default: [0, '', '']
-};
-
-map.td =
-map.th = [3, '<table><tbody><tr>', '</tr></tbody></table>'];
-
-map.option =
-map.optgroup = [1, '<select multiple="multiple">', '</select>'];
-
-map.thead =
-map.tbody =
-map.colgroup =
-map.caption =
-map.tfoot = [1, '<table>', '</table>'];
-
-map.text =
-map.circle =
-map.ellipse =
-map.line =
-map.path =
-map.polygon =
-map.polyline =
-map.rect = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'];
-
-/**
- * Parse `html` and return the children.
- *
- * @param {String} html
- * @return {Array}
- * @api private
- */
-
-function parse(html) {
-  if ('string' != typeof html) throw new TypeError('String expected');
-  
-  // tag name
-  var m = /<([\w:]+)/.exec(html);
-  if (!m) return document.createTextNode(html);
-
-  html = html.replace(/^\s+|\s+$/g, ''); // Remove leading/trailing whitespace
-
-  var tag = m[1];
-
-  // body support
-  if (tag == 'body') {
-    var el = document.createElement('html');
-    el.innerHTML = html;
-    return el.removeChild(el.lastChild);
-  }
-
-  // wrap map
-  var wrap = map[tag] || map._default;
-  var depth = wrap[0];
-  var prefix = wrap[1];
-  var suffix = wrap[2];
-  var el = document.createElement('div');
-  el.innerHTML = prefix + html + suffix;
-  while (depth--) el = el.lastChild;
-
-  // one element
-  if (el.firstChild == el.lastChild) {
-    return el.removeChild(el.firstChild);
-  }
-
-  // several elements
-  var fragment = document.createDocumentFragment();
-  while (el.firstChild) {
-    fragment.appendChild(el.removeChild(el.firstChild));
-  }
-
-  return fragment;
-}
-
-});
-
 require.register("notice", function (exports, module) {
 /**
  * Notice
@@ -712,11 +621,6 @@ require.register("notice", function (exports, module) {
 
 var classes = require("component~classes@1.2.1");
 var events = require("component~events@1.0.6");
-var domify = require("component~domify@1.2.2");
-
-function isHtml(str) {
-  return /^\s*</.test(str);
-}
 
 function create(o) {
   var el = document.createElement(o.tag || 'div');
@@ -737,7 +641,6 @@ function Notice(msg, options) {
     })
   }
   options = options || {};
-  if (isHtml(msg)) msg = domify(msg);
   options.message = msg;
   var el = createElement(options);
   this.el = el;
@@ -747,14 +650,20 @@ function Notice(msg, options) {
   if (options.type == 'success') this.clear(2000);
 }
 
-Notice.prototype.hide =
-Notice.prototype.clear = function(ms) {
+Notice.prototype.hide = function(ms) {
   ms = (typeof ms === 'number' ? ms : 0);
   this.events.unbind();
   var self = this;
   setTimeout(function() {
     dismiss(self.el);
   }, ms);
+}
+
+Notice.prototype.clear = function () {
+  var el = this.el;
+  if (el && el.parentNode) {
+    el.parentNode.removeChild(el);
+  }
 }
 
 function createElement(options) {
