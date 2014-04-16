@@ -13,7 +13,6 @@ describe('notice', function () {
 
   it('should be created with html', function () {
     var n = notice('<div class="danger">test<div>');
-    console.log(n.el);
     assert(n.el.querySelector('.danger') !== null);
     n.hide();
   })
