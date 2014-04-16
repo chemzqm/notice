@@ -7,11 +7,6 @@
 
 var classes = require('classes');
 var events = require('events');
-var domify = require('domify');
-
-function isHtml(str) {
-  return /^\s*</.test(str);
-}
 
 function create(o) {
   var el = document.createElement(o.tag || 'div');
@@ -32,7 +27,6 @@ function Notice(msg, options) {
     })
   }
   options = options || {};
-  if (isHtml(msg)) msg = domify(msg);
   options.message = msg;
   var el = createElement(options);
   this.el = el;

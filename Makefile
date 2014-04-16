@@ -14,6 +14,12 @@ watch:
 publish:
 	@component publish
 
+test:
+	@component test phantom
+
+test-browser:
+	@component test browser
+
 doc:
 	@component build
 	@rm -fr .gh-pages
@@ -23,4 +29,4 @@ doc:
 	@ghp-import .gh-pages -n -p
 	@rm -fr .gh-pages
 
-.PHONY: clean
+.PHONY: clean test doc

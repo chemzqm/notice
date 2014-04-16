@@ -4,12 +4,16 @@
   "description": "A notification message component.",
   "version": "0.0.1",
   "keywords": [],
+  "demo": "http://chemzqm.github.io/notice/",
   "dependencies": {
     "component/events": "*",
-    "component/classes": "*",
-    "component/domify": "*"
+    "component/classes": "*"
   },
-  "development": {},
+  "development": {
+    "dependencies": {
+      "component/assert": "*"
+    }
+  },
   "license": "MIT",
   "main": "index.js",
   "scripts": [
