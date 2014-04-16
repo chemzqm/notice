@@ -1,12 +1,13 @@
 {
   "name": "notice",
-  "repo": "yuehu/notice",
+  "repository": "chemzqm/notice",
   "description": "A notification message component.",
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
-    "component/event": "*",
-    "component/query": "*"
+    "component/events": "*",
+    "component/classes": "*",
+    "component/domify": "*"
   },
   "development": {},
   "license": "MIT",

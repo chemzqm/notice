@@ -6,12 +6,12 @@ components: component.json
 	@component install --dev
 
 clean:
-	rm -fr build components template.js
+	rm -fr build components
 
 watch:
 	rewatch index.js *.css -c "make build"
 
-publish:
+doc:
 	@component build
 	@rm -fr .gh-pages
 	@mkdir .gh-pages

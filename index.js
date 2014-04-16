@@ -3,72 +3,80 @@
  *
  * A notice message at the top of a webpage.
  *
- * Copyright (c) 2014 by Hsiaoming Yang.
  */
 
-var query = require('query');
-var events = require('event');
+var classes = require('classes');
+var events = require('events');
+var domify = require('domify');
 
-var COUNT = 0;
-
-function Notice(options) {
-  var el = createElement(options);
-  el.id = 'notice-' + (COUNT++);
-  this.el = el;
+function isHtml(str) {
+  return /^\s*</.test(str);
 }
 
-Notice.prototype.show = function() {
-  if (document.getElementById(this.el.id)) return;
+function create(o) {
+  var el = document.createElement(o.tag || 'div');
+  el.className = o.className;
+  el.innerHTML = o.html || '';
+  if (o.parent) o.parent.appendChild(el);
+  return el;
+}
+var container;
 
-  var container = query('.notice-container');
+
+function Notice(msg, options) {
+  if (! (this instanceof Notice)) return new Notice(msg, options);
   if (!container) {
-    container = document.createElement('div');
-    container.className = 'notice-container';
-    document.body.appendChild(container);
+    container = create({
+      className: 'notice-container',
+      parent: document.body
+    })
   }
+  options = options || {};
+  if (isHtml(msg)) msg = domify(msg);
+  options.message = msg;
+  var el = createElement(options);
+  this.el = el;
   container.appendChild(this.el);
-};
+  this.events = events(el, this);
+  this.events.bind('click .notice-close', 'hide');
+  if (options.type == 'success') this.clear(2000);
+}
 
-Notice.prototype.hide = Notice.prototype.clear = function() {
-  dismiss(this.el);
-};
+Notice.prototype.hide =
+Notice.prototype.clear = function(ms) {
+  ms = (typeof ms === 'number' ? ms : 0);
+  this.events.unbind();
+  var self = this;
+  setTimeout(function() {
+    dismiss(self.el);
+  }, ms);
+}
 
 function createElement(options) {
-  // div.notice-item
-  //   span.notice-close
-  //   div.notice-content
-  var container = document.createElement('div');
-  container.className = 'notice-item';
-  if (options.type) {
-    container.className += ' ' + options.type;
-  }
-
-  var content;
-  if (options.url) {
-    content = document.createElement('a');
-    content.href = options.url;
-    content.target = '_blank';
-  } else {
-    content = document.createElement('div');
-  }
-  content.className = 'notice-content';
-  content.innerHTML = options.message;
-
-  var close = document.createElement('span');
-  close.className = 'notice-close';
-  close.innerHTML = '×';
-
-  container.appendChild(close);
-  container.appendChild(content);
-
-  events.bind(close, 'click', function(e) {
-    dismiss(container);
+  var className = 'notice-item' + (options.type
+    ? ' notice-' + options.type
+    : '');
+  var item = create({className: className});
+  create({
+    className: 'notice-content',
+    html: options.message,
+    parent: item
   });
-  return container;
+
+  if (options.type !== 'success') {
+    var close = create({
+      className : 'notice-close',
+      html: '×',
+      parent: item
+    });
+  }
+
+  return item;
 }
 
 function dismiss(el) {
-  el.className += ' notice-dismiss';
+  if (classes(el).has('notice-dismiss')) return;
+  classes(el).add('notice-dismiss');
   setTimeout(function() {
     if (el && el.parentNode) {
       el.parentNode.removeChild(el);
@@ -76,18 +84,4 @@ function dismiss(el) {
   }, 200);
 }
 
-function notify(options, cb) {
-  if (!options) return;
-  if (!options.message) {
-    options = {message: options};
-  }
-  var time = options.duration || 4000;
-  var item = new Notice(options);
-  item.show();
-  setTimeout(function() {
-    item.clear();
-    cb && cb();
-  }, time);
-}
-notify.Notice = Notice;
-module.exports = notify;
+module.exports = Notice;

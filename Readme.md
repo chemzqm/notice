@@ -2,50 +2,33 @@
 
 A notification message component.
 
-Showcase at <http://yuehu.github.io/notice/>.
+Showcase at <http://chemzqm.github.io/notice/>.
 
 ## Installation
 
 Install with [component(1)](http://component.io):
 
-    $ component install yuehu/notice
+    $ component install chemzqm/notice
 
 ## API
 
 ```js
-var notice = require('notice');
+var Notice = require('notice');
+var notice = new Notice('show a notice', {
+  type: 'success'
+})
+notice.hide(4000);
 ```
 
-### Options
+### notice(msg, [option])
 
-1. **message**: `notice({message: 'Show a message'})`
-2. **type**: warn or error.
-3. **url**: A message with this url.
-4. **duration**: dismiss after the duration, default is 4000ms.
+Show notice with `msg` (String or HTML) and optional option.
 
-### notice(options, cb)
+* `option.type` could be `success` `warning` `error`.
 
-Show & auto dismiss an message.
+### .hide([ms])
 
-```js
-notice('Show a message');
-```
-
-### Notice(options)
-
-Create a notification.
-
-### Notice#show()
-
-Show message.
-
-### Notice#clear()
-
-Clear message.
-
-### Notice#hide()
-
-Alias for `Notice#clear()`.
+Hide the message in `ms` millisecond, success notice is auto hide.
 
 ## License
 
