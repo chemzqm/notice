@@ -2,6 +2,8 @@
 
 A notification message component.
 
+A fork with API rework from [yuehu/notice](https://github.com/yuehu/notice).
+
 Showcase at <http://chemzqm.github.io/notice/>.
 
 ## Installation
