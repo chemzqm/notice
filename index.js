@@ -36,14 +36,20 @@ function Notice(msg, options) {
   if (options.type == 'success') this.clear(2000);
 }
 
-Notice.prototype.hide =
-Notice.prototype.clear = function(ms) {
+Notice.prototype.hide = function(ms) {
   ms = (typeof ms === 'number' ? ms : 0);
   this.events.unbind();
   var self = this;
   setTimeout(function() {
     dismiss(self.el);
   }, ms);
+}
+
+Notice.prototype.clear = function () {
+  var el = this.el;
+  if (el && el.parentNode) {
+    el.parentNode.removeChild(el);
+  }
 }
 
 function createElement(options) {
