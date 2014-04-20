@@ -27,6 +27,7 @@ notice.hide(4000);
 Show notice with `msg` (String or HTML) and optional option.
 
 * `option.type` could be `success` `warning` `error`.
+* `options.hide` could be the millisecond to auto hide, no close button when set.
 
 ### .hide([ms])
 

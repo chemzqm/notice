@@ -58,6 +58,6 @@
   color: rgba(231, 76, 60, 0.6);
 }
 .notice-container .notice-dismiss {
-  transform: rotateX(60deg);
+  transform: translateY(-100%);
   opacity: 0;
 }

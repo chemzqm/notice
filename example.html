@@ -52,7 +52,7 @@
     <p>Show a simple message.</p>
     <div class="buttons">
       <button id="show">Show Message</button>
-      <button id="hide">Show &amp; Hide</button>
+      <button id="hide">Show auto Hide</button>
       <button id="warning">Warning Message</button>
       <button id="success">Success Message</button>
       <button id="error">Error Message</button>
@@ -67,7 +67,9 @@
       notice('Show a simple message');
     };
     $('hide').onclick = function() {
-      notice('Show auto hide message').hide(4000);
+    notice('Show auto hide message', {
+      hide: 2000
+    });
     };
     $('warning').onclick = function() {
       notice('warning notice', {type: 'warning'});

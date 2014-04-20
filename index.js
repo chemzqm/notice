@@ -26,14 +26,16 @@ function Notice(msg, options) {
     })
   }
   options = options || {};
+  var hide = options.hide ||(options.type == 'success' ? 2000 : false);
+  if (options.type == 'success') options.hide = 2000;
   options.message = msg;
-  var el = createElement(options);
+  var el = createElement(options, hide);
   this.el = el;
   container.appendChild(this.el);
   this.events = events(el, this);
   this.events.bind('click .notice-close', 'hide');
   this.events.bind('touchend .notice-close', 'hide');
-  if (options.type == 'success') this.hide(2000);
+  if (hide) this.hide(hide);
 }
 
 Notice.prototype.hide = function(ms) {
@@ -52,7 +54,7 @@ Notice.prototype.clear = function () {
   }
 }
 
-function createElement(options) {
+function createElement(options, hide) {
   var className = 'notice-item' + (options.type
     ? ' notice-' + options.type
     : '');
@@ -63,7 +65,7 @@ function createElement(options) {
     parent: item
   });
 
-  if (options.type !== 'success') {
+  if (!hide) {
     var close = create({
       className : 'notice-close',
       html: '×',
