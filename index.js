@@ -8,6 +8,8 @@
 var classes = require('classes');
 var events = require('events');
 
+var hasTouch = 'ontouchend' in window;
+
 function create(o) {
   var el = document.createElement(o.tag || 'div');
   el.className = o.className;
@@ -33,8 +35,11 @@ function Notice(msg, options) {
   this.el = el;
   container.appendChild(this.el);
   this.events = events(el, this);
-  this.events.bind('click .notice-close', 'hide');
-  this.events.bind('touchend .notice-close', 'hide');
+  if (hasTouch) {
+    this.events.bind('touchend .notice-close', 'hide');
+  } else {
+    this.events.bind('click .notice-close', 'hide');
+  }
   if (hide) this.hide(hide);
 }
 
