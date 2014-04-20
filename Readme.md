@@ -30,7 +30,7 @@ Show notice with `msg` (String or HTML) and optional option.
 
 ### .hide([ms])
 
-Hide the message in `ms` millisecond, success notice is auto hide.
+Hide the message in `ms` millisecond, success notice implies auto hide.
 
 ### .remove()
 
