@@ -17,7 +17,6 @@ function create(o) {
 }
 var container;
 
-
 function Notice(msg, options) {
   if (! (this instanceof Notice)) return new Notice(msg, options);
   if (!container) {
@@ -33,6 +32,7 @@ function Notice(msg, options) {
   container.appendChild(this.el);
   this.events = events(el, this);
   this.events.bind('click .notice-close', 'hide');
+  this.events.bind('touchend .notice-close', 'hide');
   if (options.type == 'success') this.hide(2000);
 }
 
