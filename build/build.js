@@ -621,6 +621,8 @@ require.register("notice", function (exports, module) {
 var classes = require("component~classes@1.2.1");
 var events = require("component~events@1.0.6");
 
+var hasTouch = 'ontouchend' in window;
+
 function create(o) {
   var el = document.createElement(o.tag || 'div');
   el.className = o.className;
@@ -646,8 +648,11 @@ function Notice(msg, options) {
   this.el = el;
   container.appendChild(this.el);
   this.events = events(el, this);
-  this.events.bind('click .notice-close', 'hide');
-  this.events.bind('touchend .notice-close', 'hide');
+  if (hasTouch) {
+    this.events.bind('touchend .notice-close', 'hide');
+  } else {
+    this.events.bind('click .notice-close', 'hide');
+  }
   if (hide) this.hide(hide);
 }
 
