@@ -10,7 +10,7 @@ function require(name) {
   var module = require.modules[name];
   if (!module) throw new Error('failed to require "' + name + '"');
 
-  if (module.definition) {
+  if (!('exports' in module) && typeof module.definition === 'function') {
     module.client = module.component = true;
     module.definition.call(this, module.exports = {}, module);
     delete module.definition;
@@ -52,7 +52,6 @@ require.define = function (name, exports) {
     exports: exports
   };
 };
-
 require.register("component~event@0.1.3", function (exports, module) {
 var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
     unbind = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
@@ -647,7 +646,7 @@ function Notice(msg, options) {
   container.appendChild(this.el);
   this.events = events(el, this);
   this.events.bind('click .notice-close', 'hide');
-  if (options.type == 'success') this.clear(2000);
+  if (options.type == 'success') this.hide(2000);
 }
 
 Notice.prototype.hide = function(ms) {
