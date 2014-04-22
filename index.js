@@ -28,10 +28,12 @@ function Notice(msg, options) {
     })
   }
   options = options || {};
-  var hide = options.hide ||(options.type == 'success' ? 2000 : false);
-  if (options.type == 'success') options.hide = 2000;
+  if (options.type == 'success') options.duration = options.duration || 2000;
+  var closable = options.hasOwnProperty('closable')? options.closable : true;
+  var hide = options.duration;
+  if (!closable && !hide) hide = 2000;
   options.message = msg;
-  var el = createElement(options, hide);
+  var el = createElement(options, closable);
   this.el = el;
   container.appendChild(this.el);
   this.events = events(el, this);
@@ -59,7 +61,7 @@ Notice.prototype.clear = function () {
   }
 }
 
-function createElement(options, hide) {
+function createElement(options, closable) {
   var className = 'notice-item' + (options.type
     ? ' notice-' + options.type
     : '');
@@ -70,7 +72,7 @@ function createElement(options, hide) {
     parent: item
   });
 
-  if (!hide) {
+  if (closable) {
     var close = create({
       className : 'notice-close',
       html: '×',
