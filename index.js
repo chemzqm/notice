@@ -9,6 +9,7 @@ var classes = require('classes');
 var events = require('events');
 
 var hasTouch = 'ontouchend' in window;
+var zIndex = 999;
 
 function create(o) {
   var el = document.createElement(o.tag || 'div');
@@ -34,6 +35,7 @@ function Notice(msg, options) {
   if (!closable && !hide) hide = 2000;
   options.message = msg;
   var el = createElement(options, closable);
+  el.style.zIndex = -- zIndex;
   this.el = el;
   container.appendChild(this.el);
   this.events = events(el, this);
