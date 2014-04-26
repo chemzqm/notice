@@ -712,4 +712,3 @@ module.exports = Notice;
 
 });
 
-require("notice")
