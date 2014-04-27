@@ -29,6 +29,7 @@ Show notice with `msg` (String or HTML) and optional option.
 * `option.type` could be `success` (implies duration to be 2000) `warning` `error`.
 * `option.duration` could be the millisecond to auto hide, no close button when set.
 * `option.closable` whether the notice should be closable.
+* `option.parent` parent node of the notice
 
 ### .hide([ms])
 

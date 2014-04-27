@@ -22,13 +22,13 @@ var container;
 
 function Notice(msg, options) {
   if (! (this instanceof Notice)) return new Notice(msg, options);
+  options = options || {};
   if (!container) {
     container = create({
       className: 'notice-container',
-      parent: document.body
+      parent: options.parent || document.body
     })
   }
-  options = options || {};
   if (options.type == 'success') options.duration = options.duration || 2000;
   var closable = options.hasOwnProperty('closable')? options.closable : true;
   var hide = options.duration;
