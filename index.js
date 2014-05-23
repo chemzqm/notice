@@ -49,9 +49,9 @@ function Notice(msg, options) {
 
 Notice.prototype.hide = function(ms) {
   ms = (typeof ms === 'number' ? ms : 0);
-  this.events.unbind();
   var self = this;
   setTimeout(function() {
+    self.events.unbind();
     dismiss(self.el);
   }, ms);
 }
