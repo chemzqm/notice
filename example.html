@@ -80,6 +80,10 @@
     $('error').onclick = function() {
       notice('error notice', {type: 'error'});
     };
+
+    document.body.addEventListener('click', function(e) {
+      console.log('click');
+    }, false);
   </script>
 </body>
 </html>

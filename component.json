@@ -6,7 +6,7 @@
   "keywords": [],
   "demo": "http://chemzqm.github.io/notice/",
   "dependencies": {
-    "component/events": "1.0.7",
+    "chemzqm/events": "*",
     "component/classes": "*"
   },
   "development": {

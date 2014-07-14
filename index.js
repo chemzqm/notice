@@ -31,8 +31,8 @@ function Notice(msg, options) {
   }
   if (options.type == 'success') options.duration = options.duration || 2000;
   var closable = options.hasOwnProperty('closable')? options.closable : true;
-  var hide = options.duration;
-  if (!closable && !hide) hide = 2000;
+  var duration = options.duration;
+  if (!closable && duration == null) duration = 2000;
   options.message = msg;
   var el = createElement(options, closable);
   el.style.zIndex = -- zIndex;
@@ -40,20 +40,25 @@ function Notice(msg, options) {
   container.appendChild(this.el);
   this.events = events(el, this);
   if (hasTouch) {
-    this.events.bind('touchend .notice-close', 'hide');
+    this.events.bind('tap .notice-close', 'hide');
   } else {
     this.events.bind('click .notice-close', 'hide');
   }
-  if (hide) this.hide(hide);
+  if (duration) {
+    setTimeout(this.hide.bind(this), duration);
+  }
 }
 
-Notice.prototype.hide = function(ms) {
-  ms = (typeof ms === 'number' ? ms : 0);
+Notice.prototype.hide = function(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  if (this._hide) return;
+  this._hide = true;
   var self = this;
-  setTimeout(function() {
-    self.events.unbind();
-    dismiss(self.el);
-  }, ms);
+  this.events.unbind();
+  dismiss(this.el);
 }
 
 Notice.prototype.clear = function () {
@@ -86,7 +91,6 @@ function createElement(options, closable) {
 }
 
 function dismiss(el) {
-  if (classes(el).has('notice-dismiss')) return;
   classes(el).add('notice-dismiss');
   setTimeout(function() {
     if (el && el.parentNode) {
