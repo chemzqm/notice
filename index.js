@@ -8,7 +8,7 @@
 var classes = require('classes');
 var events = require('events');
 
-var hasTouch = 'ontouchend' in window;
+//var hasTouch = 'ontouchend' in window;
 var zIndex = 999;
 
 function create(o) {
@@ -39,11 +39,8 @@ function Notice(msg, options) {
   this.el = el;
   container.appendChild(this.el);
   this.events = events(el, this);
-  if (hasTouch) {
-    this.events.bind('tap .notice-close', 'hide');
-  } else {
-    this.events.bind('click .notice-close', 'hide');
-  }
+  //this.events.bind('tap .notice-close', 'hide');
+  this.events.bind('click .notice-close', 'hide');
   if (duration) {
     setTimeout(this.hide.bind(this), duration);
   }
