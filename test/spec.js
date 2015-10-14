@@ -1,5 +1,5 @@
 /*global describe,it*/
-var notice = require('notice');
+var notice = require('..');
 var assert = require('assert');
 var styles = window.getComputedStyle;
 

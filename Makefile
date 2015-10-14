@@ -15,7 +15,8 @@ publish:
 	@component publish
 
 test:
-	@component test phantom
+	@npm install
+	@node_modules/.bin/karma start --single-run
 
 test-browser:
 	@component test browser
