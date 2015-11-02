@@ -2,11 +2,12 @@
   "name": "notice",
   "repository": "chemzqm/notice",
   "description": "A notification message component.",
-  "version": "0.0.13",
+  "version": "0.1.13",
   "keywords": [],
   "demo": "http://chemzqm.github.io/notice/",
   "dependencies": {
-    "chemzqm/events": "*",
+    "component/event": "*",
+    "component/tap": "*",
     "component/classes": "*"
   },
   "development": {

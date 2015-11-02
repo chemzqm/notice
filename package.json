@@ -21,14 +21,19 @@
   "style": "./notice.css",
   "homepage": "https://github.com/chemzqm/notice#readme",
   "browser": {
-    "events": "component-events",
-    "classes": "component-classes"
+    "classes": "component-classes",
+    "tap": "component-tap",
+    "query": "component-query",
+    "event": "component-event"
   },
   "dependencies": {
     "component-classes": "^1.2.4",
-    "component-events": "^1.0.9"
+    "component-event": "^0.1.4",
+    "component-query": "0.0.3",
+    "component-tap": "^1.0.1"
   },
   "devDependencies": {
+    "css-loader": "^0.21.0",
     "karma": "^0.13.11",
     "karma-cli": "^0.1.1",
     "karma-firefox-launcher": "^0.1.6",
@@ -36,6 +41,7 @@
     "karma-webpack": "^1.7.0",
     "karma-wrap-preprocessor": "^0.1.0",
     "mocha": "^2.3.3",
+    "style-loader": "^0.13.0",
     "webpack": "^1.12.2"
   }
 }
