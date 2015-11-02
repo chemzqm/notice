@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Notice</title>
   <meta name="description" content="Show a notification message or tip at the very top of the window.">
-  <script src="build/build.js"></script>
-  <link rel="stylesheet" href="build/build.css">
   <style>
     html, body {
       margin: 0;
@@ -60,26 +58,6 @@
     <p><a href="https://github.com/yuehu/notice">Fork me on GitHub</a></p>
     <p>A component by <a href="http://lepture.com/">Hsiaoming Yang</a></p>
   </div>
-  <script>
-    function $(id) { return document.getElementById(id) };
-    var notice = require('notice');
-    $('show').onclick = function() {
-      notice('Show a simple message');
-    };
-    $('hide').onclick = function() {
-    notice('Show auto hide message', {
-      duration: 2000
-    });
-    };
-    $('warning').onclick = function() {
-      notice('warning notice', {type: 'warning'});
-    };
-    $('success').onclick = function() {
-      notice('success notice', {type: 'success'});
-    };
-    $('error').onclick = function() {
-      notice('error notice', {type: 'error'});
-    };
-  </script>
+  <script src="./bundle.js"></script>
 </body>
 </html>
