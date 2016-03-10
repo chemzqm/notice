@@ -27,7 +27,7 @@
     "event": "component-event"
   },
   "dependencies": {
-    "component-classes": "^1.2.4",
+    "component-classes": "^1.2.5",
     "component-event": "^0.1.4",
     "component-query": "0.0.3",
     "component-tap": "^1.0.1"
