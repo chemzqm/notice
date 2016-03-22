@@ -1,6 +1,6 @@
 {
   "name": "component-notice",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "A notification message component.",
   "main": "index.js",
   "scripts": {
